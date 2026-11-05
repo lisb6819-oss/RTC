@@ -8,4 +8,9 @@
 #include "string.h"
 #include "stdio.h"
 
+void MainTaskInit();
+
+void MainTask();
+
+
 #endif /* INC_TASK_MAIN_H_ */

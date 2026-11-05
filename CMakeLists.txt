@@ -45,7 +45,14 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
-
+    APP/Src/task_main.c
+    Lib/Src/font.c
+    Lib/Src/kk_rtc.c
+    Lib/Src/oled.c
+    APP/Inc/task_main.h
+    Lib/Inc/font.h
+    Lib/Inc/kk_rtc.h
+    Lib/Inc/oled.h
 )
 
 # Add include paths
