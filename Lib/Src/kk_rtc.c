@@ -141,12 +141,12 @@ void KK_RTC_Init(){
 		Error_Handler();
 	}
 	struct tm time = {
-		  .tm_year = 2025 - 1900,
-		  .tm_mon = 1 - 1,
-		  .tm_mday = 1,
-		  .tm_hour = 23,
-		  .tm_min = 59,
-		  .tm_sec = 55,
+		  .tm_year = 2026 - 1900,
+		  .tm_mon = 11 - 1,
+		  .tm_mday = 5,
+		  .tm_hour = 22,
+		  .tm_min = 50,
+		  .tm_sec = 0,
 	};
 	KK_RTC_SetTime(&time);
 	HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, RTC_INIT_FLAG);
