@@ -1,6 +1,6 @@
 #include "knob.h"
-#include "stm32f1xx_hal_tim.h"
 #include "tim.h"
+#include <stddef.h>
 
 #define COUNTER_INIT_VALUE 65535/2
 KnobCallback onForwardCallback = NULL;
