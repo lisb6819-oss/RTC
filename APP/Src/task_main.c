@@ -1,4 +1,5 @@
 #include "task_main.h"
+#include "kk_rtc.h"
 #include "knob.h"
 #include "oled.h"
 #include "stm32f1xx_hal.h"
@@ -27,11 +28,62 @@ struct tm settingTime;
 char weeks[7][10] ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
 void onKnobForward(){
-    printf("Forward!\r\n");
+    if(canlendarState == settingState){
+        switch (settingState) {
+            case Year:
+                settingTime.tm_year++;
+                break;
+            case Month:
+                settingTime.tm_mon++;
+                if(settingTime.tm_mon >11) settingTime.tm_mon = 0;
+                break;
+            case day:
+                settingTime.tm_mday++;
+                if(settingTime.tm_mday > 31) settingTime.tm_mday = 1;
+                break;
+            case Hour:
+                settingTime.tm_hour++;
+                if(settingTime.tm_hour > 23) settingTime.tm_hour = 0;
+                break;
+            case Minute:
+                settingTime.tm_min++;
+                if(settingTime.tm_min > 59)  settingTime.tm_min = 0;
+                break;
+            case Second:
+                settingTime.tm_sec++;
+                if (settingTime.tm_sec > 59)  settingTime.tm_sec = 0;
+                break;
+    }
 }
-
+}
 void onKonbBackward(){
-    printf("Backward!\r\n");
+    if(canlendarState == settingState){
+        switch (settingState) {
+            case Year:
+                settingTime.tm_year--;
+                if (settingTime.tm_year < 70)  settingTime.tm_year = 70;
+                break;
+            case Month:
+                settingTime.tm_mon--;
+                if(settingTime.tm_mon < 0) settingTime.tm_mon = 11;
+                break;
+            case day:
+                settingTime.tm_mday--;
+                if(settingTime.tm_mday < 0) settingTime.tm_mday = 31;
+                break;
+            case Hour:
+                settingTime.tm_hour--;
+                if(settingTime.tm_hour < 0) settingTime.tm_hour = 23;
+                break;
+            case Minute:
+                settingTime.tm_min--;
+                if(settingTime.tm_min < 0)  settingTime.tm_min = 59;
+                break;
+            case Second:
+                settingTime.tm_sec--;
+                if (settingTime.tm_sec < 0)  settingTime.tm_sec = 59;
+                break;
+    }}
 }
 void onKnobPress(){
     if(canlendarState == CanlendarState_Normal){
@@ -39,7 +91,8 @@ void onKnobPress(){
         settingState = Year;
         canlendarState = CanlendarState_Setting;
     }else{
-        if(settingState = Second){
+        if(settingState == Second){
+            KK_RTC_SetTime(&settingTime);
             canlendarState = CanlendarState_Normal;
         }else {
             settingState++;
