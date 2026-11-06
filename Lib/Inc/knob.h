@@ -10,5 +10,6 @@ void Knob_Init();
 void Knob_Loop();
 void Knob_SetForwardCallback(KnobCallback callback);
 void Knob_SetBackwardCallback(KnobCallback callback);
+void Knob_SetPressCallback(KnobCallback callback);
 
 #endif // KNOB_H
