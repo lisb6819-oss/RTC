@@ -1,6 +1,15 @@
 #include "task_main.h"
+#include "knob.h"
 
 char weeks[7][10] ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+
+void onKnobForward(){
+    printf("Forward!\r\n");
+}
+
+void onKonbBackward(){
+    printf("Backward!\r\n");
+}
 
 void ShowTime(struct tm* time) {
     char str[50];
@@ -22,10 +31,14 @@ void MainTaskInit()
     HAL_Delay(20);
     OLED_Init();
     KK_RTC_Init();
+    Knob_Init();
+    Knob_SetForwardCallback(onKnobForward);
+    Knob_SetBackwardCallback(onKonbBackward);
 }
 
 void MainTask()
 {
+    Knob_Loop();
     OLED_NewFrame();
 
     struct tm *now = KK_RTC_GetTime();
