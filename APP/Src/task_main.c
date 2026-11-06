@@ -28,7 +28,7 @@ struct tm settingTime;
 char weeks[7][10] ={"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
 
 void onKnobForward(){
-    if(canlendarState == settingState){
+    if(canlendarState == CanlendarState_Setting){
         switch (settingState) {
             case Year:
                 settingTime.tm_year++;
@@ -57,7 +57,7 @@ void onKnobForward(){
 }
 }
 void onKonbBackward(){
-    if(canlendarState == settingState){
+    if(canlendarState == CanlendarState_Setting){
         switch (settingState) {
             case Year:
                 settingTime.tm_year--;
@@ -69,7 +69,7 @@ void onKonbBackward(){
                 break;
             case day:
                 settingTime.tm_mday--;
-                if(settingTime.tm_mday < 0) settingTime.tm_mday = 31;
+                if(settingTime.tm_mday < 1) settingTime.tm_mday = 31;
                 break;
             case Hour:
                 settingTime.tm_hour--;
